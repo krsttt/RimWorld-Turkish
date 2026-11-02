@@ -1,6 +1,6 @@
-const DUR = 29.58;
-const SCENES = [[0, '#FF7A45', '#E8336D'], [5.5, '#3A7BFF', '#00C2FF'], [9, '#8B5CF6', '#E056FD'], [13, '#00B894', '#0098C7'], [16.5, '#FF4F8B', '#FF8A5B'], [20, '#5B5BF0', '#9B7BFF'], [23, '#FF5E62', '#FF9966']];
-const KN = [[0.0, 0], [2.599, 3.2], [4.568, 5.5], [7.998, 9], [11.545, 13], [15.205, 16.5], [18.371, 18.3], [21.871, 20], [25.981, 23], [29.581, 25.5]];
+const DUR = 25.14;
+const SCENES = [[0, '#FF7A45', '#E8336D'], [9.3, '#8B5CF6', '#E056FD'], [13, '#00B894', '#0098C7'], [16.5, '#FF4F8B', '#FF8A5B'], [20, '#5B5BF0', '#9B7BFF'], [23, '#FF5E62', '#FF9966']];
+const KN = [[0.0, 0], [2.418, 3.2], [4.239, 5.5], [4.24, 9], [7.889, 13], [11.467, 16.5], [14.902, 18.3], [17.722, 20], [21.542, 23], [25.142, 25.5]];
 function remap(t) {
   for (let i = 1; i < KN.length; i++) if (t <= KN[i][0]) {
     const [r0, o0] = KN[i - 1], [r1, o1] = KN[i]; return o0 + (t - r0) / (r1 - r0) * (o1 - o0);
@@ -10,7 +10,6 @@ function remap(t) {
 const SUB = [
   [0, 3.2, '8 saat masa başındaysan,'],
   [3.2, 5.5, 'bu hesap senin için.'],
-  [5.5, 9, 'Ben fizyoterapistim. Bugün ilk günüm.'],
   [9, 13, 'Boyun ağrısı, bel ağrısı, kola vuran uyuşma.'],
   [13, 16.5, '8 saat oturmanın faturası hep bu 3 yere çıkıyor.'],
   [16.5, 18.3, 'Burada ofiste yapılacak hareketler göstereceğim.'],

@@ -41,3 +41,13 @@ klipler `ses/pocket_female_2/` içinde. Ses için atıf: "Ses: Pocket TTS Turkis
   (Reel 1: 29.6 sn, Reel 2: 36.1 sn), sahne geçişlerine hafif efekt sesleri eklendi (`ses/ahenk_build.py`).
 - İlk kare artık başlıkla açılıyor; "Eğme/Kaydır" sahnesinde masa ve sandalye eklendi; "Çeneyi geri it" oku başın üstüne alındı.
 - `kapaklar/`: profil ızgarasında (3:4) düzgün görünecek kapak görselleri.
+
+## Güncelleme 4: tek ses, "ilk gün" sahnesi çıkarıldı, diş hekimi videosu
+
+- `videolar/*_tekses.mp4`: paylaşılacak son sürümler (3 video).
+- Tüm cümleler VoxCPM2 "ultimate cloning" ile tek bir referans sesten üretildi (`ses/gen_clone.py`).
+  Referans: Ahenk model kartındaki tasarlanmış (sentetik) f022 sesi örneği. Duygu talimatı kullanılmadı.
+  Konuşmacı tutarlılığı (`ses/spk.py`, cümleler arası en düşük benzerlik): 0.56 → 0.66, ortalama 0.91.
+- Reel 1'den "Ben fizyoterapistim. Bugün ilk günüm" sahnesi çıkarıldı (25 sn).
+- `animasyon/reel3.js`: diş hekimlerinde duruş bozukluğu videosu (39 sn). Kaynaklar: Lietz ve ark. 2018
+  (PLoS ONE meta-analizi: boyun %58,5, bel %56,4, omuz %43,1), FDI ergonomi rehberi.
