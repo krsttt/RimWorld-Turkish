@@ -1,0 +1,20 @@
+# Instagram Reels: masa başı çalışanlar için fizyoterapist
+
+Animasyonlu iki Reel (1080x1920, 30 fps).
+
+- `videolar/reel1_video.mp4`, `videolar/reel2_video.mp4`: sessiz animasyonlar (altyazılı)
+- `videolar/*_kadin_sesi.mp4`: Piper "fettah" (tr_TR, CC0) sesiyle seslendirilmiş sürümler
+- `animasyon/`: canvas animasyon kodu. Render: `node render.js reel1.html cikti.mp4 video`
+  (Playwright + ffmpeg). Ara kare: `node render.js reel1.html prev/r1 frames 1.5,4.5`
+- `ses/lines.tsv`: seslendirme metinleri ve hangi cümlenin hangi sahneye ait olduğu
+- `ses/select.py`: her cümle için aday üretip Whisper ile en anlaşılır olanı seçer
+
+## Ses yerleşim zamanları (saniye)
+
+Reel 1 (30.6 sn): r1_0 0.15, r1_1 3.3, r1_2 5.65, r1_3 9.25, r1_4 12.95, r1_5 16.75, r1_6 20.05, r1_7 22.95, r1_8 27.45
+Reel 2 (34 sn): r2_0 0.1, r2_1 3.1, r2_2 6.1, r2_3 9.6, r2_4 13.1, r2_5 15.6, r2_6 19.2, r2_7 23.6, r2_8 26.6, r2_9 28.5, r2_10 31.1
+
+## Sonraki adım
+
+huggingface.co erişimi açıldıktan sonra Pocket TTS Turkish (`pip install pocket-tts-turkish`,
+kadın sesleri female_1/2/3, CC-BY-4.0) ile cümleleri yeniden üretip aynı zamanlara yerleştirmek.
