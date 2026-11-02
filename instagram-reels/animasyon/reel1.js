@@ -8,7 +8,7 @@ function remap(t) {
 }
 const SUB = [
   [0, 3.2, '8 saat masa başındaysan,'],
-  [3.2, 5.5, 'bu hesap senin.'],
+  [3.2, 5.5, 'bu hesap senin için.'],
   [5.5, 9, 'Ben fizyoterapistim. Bugün ilk günüm.'],
   [9, 13, 'Boyun ağrısı, bel ağrısı, kola vuran uyuşma.'],
   [13, 16.5, '8 saat oturmanın faturası hep bu 3 yere çıkıyor.'],

@@ -18,3 +18,9 @@ Reel 2 (34 sn): r2_0 0.1, r2_1 3.1, r2_2 6.1, r2_3 9.6, r2_4 13.1, r2_5 15.6, r2
 
 huggingface.co erişimi açıldıktan sonra Pocket TTS Turkish (`pip install pocket-tts-turkish`,
 kadın sesleri female_1/2/3, CC-BY-4.0) ile cümleleri yeniden üretip aynı zamanlara yerleştirmek.
+
+## Güncelleme: Pocket TTS Turkish sesi
+
+`videolar/*_yeni_ses.mp4`: Pocket TTS Turkish `female_2` (sıcak, samimi; CC-BY-4.0) ile seslendirildi.
+Cümleler `ses/select_pocket.py` ile üretildi (`ONLY=... NSEED=8 python select_pocket.py female_2 <whisper-klasörü>`),
+klipler `ses/pocket_female_2/` içinde. Ses için atıf: "Ses: Pocket TTS Turkish (wite-tech), CC-BY-4.0".
