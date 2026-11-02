@@ -33,3 +33,11 @@ klipler `ses/pocket_female_2/` içinde. Ses için atıf: "Ses: Pocket TTS Turkis
   cümleye göre duygu talimatıyla (neşeli, sıcak, sakin) seslendirildi. `ses/ahenk_gen.py` ile üretildi.
 - Animasyon zamanlaması sese göre yeniden hesaplandı (`KN` dizileri, `ses/ahenk_zamanlama.json`).
 - Atıf: "Seslendirme: Ahenk (ozgurguler), CC-BY-4.0. Yapay zekâ ile üretilmiş ses."
+
+## Güncelleme 3: son kontrol iyileştirmeleri
+
+- `videolar/*_final.mp4`: paylaşılacak son sürümler.
+- Cümle ses seviyeleri eşitlendi (-16 LUFS; önce -12 ile -20 arasıydı), cümle arası boşluklar kısaltıldı
+  (Reel 1: 29.6 sn, Reel 2: 36.1 sn), sahne geçişlerine hafif efekt sesleri eklendi (`ses/ahenk_build.py`).
+- İlk kare artık başlıkla açılıyor; "Eğme/Kaydır" sahnesinde masa ve sandalye eklendi; "Çeneyi geri it" oku başın üstüne alındı.
+- `kapaklar/`: profil ızgarasında (3:4) düzgün görünecek kapak görselleri.

@@ -1,6 +1,6 @@
-const DUR = 31.5;
+const DUR = 29.58;
 const SCENES = [[0, '#FF7A45', '#E8336D'], [5.5, '#3A7BFF', '#00C2FF'], [9, '#8B5CF6', '#E056FD'], [13, '#00B894', '#0098C7'], [16.5, '#FF4F8B', '#FF8A5B'], [20, '#5B5BF0', '#9B7BFF'], [23, '#FF5E62', '#FF9966']];
-const KN = [[0.0, 0], [3.05, 3.2], [5.349, 5.5], [8.849, 9], [12.846, 13], [16.656, 16.5], [19.972, 18.3], [23.622, 20], [27.882, 23], [31.499, 25.5]];
+const KN = [[0.0, 0], [2.599, 3.2], [4.568, 5.5], [7.998, 9], [11.545, 13], [15.205, 16.5], [18.371, 18.3], [21.871, 20], [25.981, 23], [29.581, 25.5]];
 function remap(t) {
   for (let i = 1; i < KN.length; i++) if (t <= KN[i][0]) {
     const [r0, o0] = KN[i - 1], [r1, o1] = KN[i]; return o0 + (t - r0) / (r1 - r0) * (o1 - o0);
@@ -39,14 +39,14 @@ function render(t) {
   bg(t);
 
   // S1 0-5.5: desk, 8 hours
-  let a = win(t, 0, 5.5);
+  let a = win(t, -1, 5.5);
   if (a > 0) {
     g.save(); g.globalAlpha = a;
     const f = eio(prog(t, .2, 4));
     fig(300, 1060, { fwd: lerp(5, 50, f), pain: f * .8, t });
-    clock(170, 690, 78 * back(prog(t, 0, .5)), t);
+    clock(170, 690, 78, t);
     g.restore();
-    headline(t, 0, 3.2, [['8 SAAT', C.coral, 190], ['MASA BAŞINDA MISIN?', C.ink, 72]], 400);
+    headline(t, -0.45, 3.2, [['8 SAAT', C.coral, 190], ['MASA BAŞINDA MISIN?', C.ink, 72]], 400);
     headline(t, 3.2, 5.5, [['BU HESAP', C.teal], ['SENİN İÇİN', C.teal]], 420);
   }
 

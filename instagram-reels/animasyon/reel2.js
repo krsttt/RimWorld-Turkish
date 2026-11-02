@@ -1,5 +1,5 @@
-const DUR = 37.63;
-const KN = [[0.0, 0], [3.33, 3], [6.33, 6], [10.099, 9.5], [13.822, 13], [16.672, 15.5], [20.248, 19], [24.128, 23.5], [27.422, 26.5], [29.628, 28.5], [33.424, 31], [37.631, 34]];
+const DUR = 36.12;
+const KN = [[0.0, 0], [3.18, 3], [5.97, 6], [9.589, 9.5], [13.162, 13], [15.862, 15.5], [19.362, 19], [23.662, 23.5], [26.807, 26.5], [28.863, 28.5], [32.509, 31], [36.115, 34]];
 function remap(t) {
   for (let i = 1; i < KN.length; i++) if (t <= KN[i][0]) {
     const [r0, o0] = KN[i - 1], [r1, o1] = KN[i]; return o0 + (t - r0) / (r1 - r0) * (o1 - o0);
@@ -46,7 +46,7 @@ function render(t) {
   bg(t);
 
   // ---- seated figure 0 - 23.5 ----
-  const a = win(t, 0, 23.5);
+  const a = win(t, -1, 23.5);
   if (a > 0) {
     g.save(); g.globalAlpha = a;
     const fwd = fwdAt(t);
@@ -89,7 +89,7 @@ function render(t) {
     if (k > 0) { g.save(); g.globalAlpha = k; check(h.hx - 170, h.hy - 60, 46 * back(prog(t, 14.2, .4)), C.green); g.restore(); }
     // 15.5-23.5: back arrow during tuck
     k = win(t, 15.5, 23.5);
-    if (k > 0 && fwd < -5) { g.save(); g.globalAlpha = k; arrow(h.hx + 60, h.hy + 100, h.hx - 60, h.hy + 100, C.teal, 14); g.restore(); }
+    if (k > 0 && fwd < -5) { g.save(); g.globalAlpha = k; arrow(h.hx + 70, h.hy - 108, h.hx - 50, h.hy - 108, C.sun, 16); g.restore(); }
     // 19-23.5: hold countdown + reps
     k = win(t, 19.2, 23.5);
     if (k > 0) {
@@ -107,7 +107,7 @@ function render(t) {
   }
 
   // headlines
-  headline(t, 0, 3, [['BOYUN AĞRISI?', C.coral, 100], ['10 SANİYE VER', C.teal, 90]], 330);
+  headline(t, -0.45, 3, [['BOYUN AĞRISI?', C.coral, 100], ['10 SANİYE VER', C.teal, 90]], 330);
   headline(t, 3, 6, [['BAŞIN ≈ 5 KG', C.ink, 110]], 360);
   headline(t, 6, 9.5, [['EKRANA', C.ink, 90], ['ÖNE KAYIYOR', C.coral, 110]], 320);
   headline(t, 9.5, 13, [['BÜTÜN GÜN', C.ink, 90], ['5 KG TAŞIYOR', C.coral, 110]], 290);
@@ -119,8 +119,8 @@ function render(t) {
   let k = win(t, 23.5, 26.5);
   if (k > 0) {
     g.save(); g.globalAlpha = k;
-    fig(170, 1000, { down: .5, furniture: false, s: .62 });
-    fig(560, 1000, { fwd: -30, furniture: false, s: .62 });
+    fig(150, 1000, { down: .5, s: .6, t });
+    fig(545, 1000, { fwd: -30, s: .6, t });
     const p1 = back(prog(t, 23.8, .4)), p2 = back(prog(t, 24.4, .4));
     cross(250, 1130, 55 * p1, C.coral); check(640, 1130, 55 * p2, C.green);
     stext('Aşağı eğme', 250, 1220, 46, '#fff', { a: clamp(p1) }); sparkle(t, 23.8, 250, 1130, 160, 8);

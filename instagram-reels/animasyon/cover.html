@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}canvas{display:block}</style></head>
+<body><canvas id="c"></canvas><script src="common.js"></script><script>
+const which = new URLSearchParams(location.search).get('k') || 'r1';
+const SCENES = which === 'r1' ? [[0, '#FF7A45', '#E8336D']] : [[0, '#3A7BFF', '#8B5CF6']];
+function pill(x, y, w, h, col) { g.fillStyle = C.navy; rr(x - w / 2 + 6, y - h / 2 + 9, w, h, h / 2); g.fill(); g.fillStyle = col; rr(x - w / 2, y - h / 2, w, h, h / 2); g.fill(); }
+function tag(text, x, y, size, rot) {
+  g.font = `900 ${size}px Inter`; const w = g.measureText(text).width + size * .8, h = size * 1.3;
+  g.save(); g.translate(x, y); g.rotate(rot); g.fillStyle = C.navy; rr(-w / 2 + 8, -h / 2 + 12, w, h, 30); g.fill();
+  g.fillStyle = C.coral; rr(-w / 2, -h / 2, w, h, 30); g.fill(); g.restore();
+  txt(text, x, y + 5, size, '#fff', { weight: 900, rot, maxW: 2000 });
+}
+function render() {
+  const t = 5;
+  bg(t);
+  // grid-safe guides (not drawn): y 240..1680
+  if (which === 'r1') {
+    stext('KLİNİKTE', CX + 40, 470, 120, '#fff', { rot: -.03 });
+    tag('İLK GÜNÜM', CX + 40, 625, 120, .02);
+    fig(320, 1290, { fwd: 5, t: 0.5 });
+    g.save(); g.translate(840, 850); g.rotate(-.18);
+    g.fillStyle = C.navy; rr(-130 + 6, -60 + 9, 260, 120, 20); g.fill(); g.fillStyle = '#fff'; rr(-130, -60, 260, 120, 20); g.fill();
+    g.strokeStyle = C.coral; g.lineWidth = 10; rr(-120, -50, 240, 100, 16); g.stroke(); txt('1. GÜN', 0, 4, 64, C.coral, { weight: 900 }); g.restore();
+    pill(CX + 40, 1560, 640, 96, '#fff'); txt('Masa başı çalışanlar için', CX + 40, 1563, 46, C.navy, { weight: 800 });
+  } else {
+    tag('BOYUN AĞRISI?', CX + 40, 470, 100, -.025);
+    stext('10 SANİYELİK', CX + 40, 630, 100, C.sun, { rot: .02 });
+    stext('HAREKET', CX + 40, 750, 100, C.sun, { rot: .02 });
+    const h = fig(320, 1330, { fwd: -30, t: 0.5 });
+    g.save(); g.setLineDash([16, 12]); g.strokeStyle = '#fff'; g.lineWidth = 8;
+    const f0 = 50, nx = 320 + 26 + f0 * .6, ny = 1330 - 320 + f0 * .22; circ(nx + 10 + f0 * .45, ny - 55, 60); g.stroke(); g.restore();
+    arrow(h.hx + 70, h.hy - 108, h.hx - 50, h.hy - 108, C.sun, 16);
+    pill(CX + 40, 1580, 600, 96, '#fff'); txt('Masa başında yap', CX + 40, 1583, 48, C.navy, { weight: 800 });
+  }
+}
+</script></body></html>
