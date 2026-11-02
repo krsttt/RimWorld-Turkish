@@ -1,5 +1,6 @@
-const DUR = 30.6;
-const KN = [[0, 0], [16.7, 16.5], [20.0, 18.3], [22.9, 20], [27.3, 23], [30.6, 25.5]];
+const DUR = 31.5;
+const SCENES = [[0, '#FF7A45', '#E8336D'], [5.5, '#3A7BFF', '#00C2FF'], [9, '#8B5CF6', '#E056FD'], [13, '#00B894', '#0098C7'], [16.5, '#FF4F8B', '#FF8A5B'], [20, '#5B5BF0', '#9B7BFF'], [23, '#FF5E62', '#FF9966']];
+const KN = [[0.0, 0], [3.05, 3.2], [5.349, 5.5], [8.849, 9], [12.846, 13], [16.656, 16.5], [19.972, 18.3], [23.622, 20], [27.882, 23], [31.499, 25.5]];
 function remap(t) {
   for (let i = 1; i < KN.length; i++) if (t <= KN[i][0]) {
     const [r0, o0] = KN[i - 1], [r1, o1] = KN[i]; return o0 + (t - r0) / (r1 - r0) * (o1 - o0);
@@ -69,7 +70,7 @@ function render(t) {
     if (sp > 0) {
       const sc = lerp(2.6, 1, eo(sp));
       g.save(); g.globalAlpha = a * clamp(sp * 3); g.translate(CX + 190, 650); g.rotate(-.2); g.scale(sc, sc);
-      g.strokeStyle = C.coral; g.lineWidth = 12; rr(-150, -62, 300, 124, 20); g.stroke();
+      g.fillStyle = '#fff'; rr(-150, -62, 300, 124, 20); g.fill(); g.strokeStyle = C.coral; g.lineWidth = 12; rr(-150, -62, 300, 124, 20); g.stroke();
       txt('1. GÜN', 0, 4, 76, C.coral, { weight: 900 });
       g.restore();
     }
@@ -177,9 +178,9 @@ function render(t) {
   a = win(t, 23, 25.6);
   if (a > 0) {
     const p1 = back(prog(t, 23.1, .45)), p2 = back(prog(t, 23.8, .45));
-    txt('8 saat senin.', CX, 700, 110, C.ink, { a: a * clamp(p1 * 2), sc: p1 });
-    txt('30 saniyesi', CX, 860, 120, C.teal, { a: a * clamp(p2 * 2), sc: p2 });
-    txt('benim.', CX, 990, 120, C.teal, { a: a * clamp(p2 * 2), sc: p2 });
+    stext('8 saat senin.', CX, 700, 110, '#fff', { a: a * clamp(p1 * 2), sc: p1 }); sparkle(t, 23.1, CX, 700, 420, 16);
+    stext('30 saniyesi', CX, 860, 120, C.sun, { a: a * clamp(p2 * 2), sc: p2 });
+    stext('benim.', CX, 990, 120, C.sun, { a: a * clamp(p2 * 2), sc: p2 }); sparkle(t, 23.8, CX, 920, 420, 16);
     const p3 = prog(t, 24.4, .4);
     g.save(); g.globalAlpha = a * p3; pill(CX, 1150, 420, 96, C.coral); g.restore();
     txt('TAKİP ET', CX, 1153, 50, C.white, { a: a * p3 });
@@ -188,4 +189,4 @@ function render(t) {
   subs(t, SUB);
 }
 
-function pill(x, y, w, h, col, al = 1) { g.save(); g.globalAlpha *= al; g.fillStyle = col; rr(x - w / 2, y - h / 2, w, h, h / 2); g.fill(); g.restore(); }
+function pill(x, y, w, h, col, al = 1) { g.save(); g.globalAlpha *= al; g.fillStyle = C.navy; rr(x - w / 2 + 5, y - h / 2 + 8, w, h, h / 2); g.fill(); g.fillStyle = col; rr(x - w / 2, y - h / 2, w, h, h / 2); g.fill(); g.restore(); }

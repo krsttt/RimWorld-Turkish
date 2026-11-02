@@ -24,3 +24,12 @@ kadın sesleri female_1/2/3, CC-BY-4.0) ile cümleleri yeniden üretip aynı zam
 `videolar/*_yeni_ses.mp4`: Pocket TTS Turkish `female_2` (sıcak, samimi; CC-BY-4.0) ile seslendirildi.
 Cümleler `ses/select_pocket.py` ile üretildi (`ONLY=... NSEED=8 python select_pocket.py female_2 <whisper-klasörü>`),
 klipler `ses/pocket_female_2/` içinde. Ses için atıf: "Ses: Pocket TTS Turkish (wite-tech), CC-BY-4.0".
+
+## Güncelleme 2: canlı tasarım ve Ahenk sesi
+
+- Animasyon yeni renk paleti ile yeniden tasarlandı: sahne başına canlı renk geçişleri, süzülen şekiller,
+  çıkartma (sticker) başlıklar, parıltılar, renkli karakter ve kupa.
+- `videolar/*_canli.mp4`: Ahenk (VoxCPM2 + Türkçe LoRA, `ozgurguler/ahenk-tts-tr`, CC-BY-4.0) kadın sesiyle,
+  cümleye göre duygu talimatıyla (neşeli, sıcak, sakin) seslendirildi. `ses/ahenk_gen.py` ile üretildi.
+- Animasyon zamanlaması sese göre yeniden hesaplandı (`KN` dizileri, `ses/ahenk_zamanlama.json`).
+- Atıf: "Seslendirme: Ahenk (ozgurguler), CC-BY-4.0. Yapay zekâ ile üretilmiş ses."

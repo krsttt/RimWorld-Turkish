@@ -1,4 +1,12 @@
-const DUR = 34;
+const DUR = 37.63;
+const KN = [[0.0, 0], [3.33, 3], [6.33, 6], [10.099, 9.5], [13.822, 13], [16.672, 15.5], [20.248, 19], [24.128, 23.5], [27.422, 26.5], [29.628, 28.5], [33.424, 31], [37.631, 34]];
+function remap(t) {
+  for (let i = 1; i < KN.length; i++) if (t <= KN[i][0]) {
+    const [r0, o0] = KN[i - 1], [r1, o1] = KN[i]; return o0 + (t - r0) / (r1 - r0) * (o1 - o0);
+  }
+  return KN[KN.length - 1][1];
+}
+const SCENES = [[0, '#FF7A45', '#E8336D'], [3, '#FF5E62', '#FF9966'], [6, '#3A7BFF', '#00C2FF'], [9.5, '#8B5CF6', '#E056FD'], [13, '#00B894', '#0098C7'], [15.5, '#2563FF', '#22C5E0'], [19, '#5B5BF0', '#9B7BFF'], [23.5, '#FF4F8B', '#FF8A5B'], [26.5, '#00B894', '#0098C7'], [28.5, '#FF8A3D', '#FF3D71'], [31, '#8B5CF6', '#E056FD']];
 const SUB = [
   [0, 3, 'Akşam boynun ağrıyorsa, 10 saniye ver.'],
   [3, 6, 'Başın yaklaşık 5 kilo.'],
@@ -14,7 +22,7 @@ const SUB = [
 ];
 const HX = 300, HY = 1070;
 
-function pill(x, y, w, h, col, al = 1) { g.save(); g.globalAlpha *= al; g.fillStyle = col; rr(x - w / 2, y - h / 2, w, h, h / 2); g.fill(); g.restore(); }
+function pill(x, y, w, h, col, al = 1) { g.save(); g.globalAlpha *= al; g.fillStyle = C.navy; rr(x - w / 2 + 5, y - h / 2 + 8, w, h, h / 2); g.fill(); g.fillStyle = col; rr(x - w / 2, y - h / 2, w, h, h / 2); g.fill(); g.restore(); }
 
 // head-forward amount over the first 23.5 s
 function fwdAt(t) {
@@ -34,6 +42,7 @@ function fwdAt(t) {
 }
 
 function render(t) {
+  t = remap(t);
   bg(t);
 
   // ---- seated figure 0 - 23.5 ----
@@ -47,7 +56,7 @@ function render(t) {
     // ghost of forward head while showing the tuck
     if (t >= 15.5 && t < 23.5) {
       const f0 = 50, nx = HX + 26 + f0 * .6, ny = HY - 320 + f0 * .22;
-      g.save(); g.globalAlpha *= .8; g.setLineDash([16, 12]); g.strokeStyle = C.coral; g.lineWidth = 7;
+      g.save(); g.globalAlpha *= .8; g.setLineDash([16, 12]); g.strokeStyle = '#fff'; g.lineWidth = 8;
       circ(nx + 10 + f0 * .45, ny - 55, 60); g.stroke(); g.restore();
     }
     const h = fig(HX, HY, { fwd, pain, t, glow: 1 });
@@ -85,14 +94,14 @@ function render(t) {
     k = win(t, 19.2, 23.5);
     if (k > 0) {
       g.save(); g.globalAlpha = k;
-      const x = 780, y = 680, r = 90;
+      const x = 800, y = 590, r = 90;
       g.fillStyle = C.white; circ(x, y, r); g.fill();
       const hp = prog(t, 19.8, 3);
       g.strokeStyle = C.teal; g.lineWidth = 18; g.lineCap = 'round';
       g.beginPath(); g.arc(x, y, r - 14, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * hp); g.stroke();
       const n = t < 19.8 ? 3 : Math.max(1, 3 - Math.floor(t - 19.8));
       txt(t > 22.8 ? '✓' : String(n), x, y + 4, 90, t > 22.8 ? C.green : C.ink, { weight: 900 });
-      txt('TUT', x, y + 130, 38, C.mut, { weight: 800 });
+      stext('TUT', x, y + 130, 40, '#fff');
       g.restore();
     }
   }
@@ -114,8 +123,8 @@ function render(t) {
     fig(560, 1000, { fwd: -30, furniture: false, s: .62 });
     const p1 = back(prog(t, 23.8, .4)), p2 = back(prog(t, 24.4, .4));
     cross(250, 1130, 55 * p1, C.coral); check(640, 1130, 55 * p2, C.green);
-    txt('Aşağı eğme', 250, 1220, 46, C.coral, { a: clamp(p1) });
-    txt('Geriye kaydır', 640, 1220, 46, C.green, { a: clamp(p2) });
+    stext('Aşağı eğme', 250, 1220, 46, '#fff', { a: clamp(p1) }); sparkle(t, 23.8, 250, 1130, 160, 8);
+    stext('Geriye kaydır', 640, 1220, 46, C.sun, { a: clamp(p2) }); sparkle(t, 24.4, 640, 1130, 160, 8);
     g.restore();
     headline(t, 23.5, 26.5, [['EĞME,', C.coral, 110], ['KAYDIR', C.teal, 110]], 330);
   }
@@ -129,8 +138,10 @@ function render(t) {
       const p = back(prog(t, 26.6 + i * .2, .35));
       const x = 230 + (i % 2) * 300, y = 760 + Math.floor(i / 2) * 290;
       g.save(); g.translate(x, y); g.scale(p, p);
-      g.fillStyle = i === 3 ? 'rgba(14,124,123,.35)' : C.teal; circ(0, 0, 115); g.fill();
-      txt(s, 0, 4, 52, C.white, { weight: 900 }); g.restore();
+      g.fillStyle = C.navy; circ(6, 10, 121); g.fill();
+      g.fillStyle = i === 3 ? '#FFE9A8' : '#fff'; circ(0, 0, 115); g.fill();
+      g.strokeStyle = [C.pink, C.teal, C.orange, C.purple][i]; g.lineWidth = 16; circ(0, 0, 96); g.stroke();
+      txt(s, 0, 4, 52, C.navy, { weight: 900 }); g.restore();
     });
     g.restore();
     headline(t, 26.5, 28.5, [['GÜNDE 3–4 KEZ', C.ink, 100]], 360);
@@ -161,12 +172,12 @@ function render(t) {
     const bounce = 1 + Math.max(0, Math.sin((t - 31.8) * 8)) * .06 * (t > 31.8 && t < 32.6 ? 1 : 0);
     g.translate(CX, 820); g.scale(p * bounce, p * bounce);
     const fill = prog(t, 31.8, .4);
-    g.lineJoin = 'round'; g.lineWidth = 22; g.strokeStyle = C.teal;
+    g.lineJoin = 'round'; g.lineWidth = 22; g.strokeStyle = C.navy;
     g.beginPath(); g.moveTo(-120, -190); g.lineTo(120, -190); g.lineTo(120, 200); g.lineTo(0, 90); g.lineTo(-120, 200); g.closePath();
-    g.stroke(); g.save(); g.globalAlpha *= fill; g.fillStyle = C.teal; g.fill(); g.restore();
-    g.restore();
-    txt('Akşam boynun', CX, 1110, 56, C.ink, { a: k * prog(t, 32, .4), weight: 700 });
-    txt('ağrıyınca aç.', CX, 1180, 56, C.ink, { a: k * prog(t, 32, .4), weight: 700 });
+    g.stroke(); g.save(); g.globalAlpha *= fill; g.fillStyle = C.sun; g.fill(); g.restore();
+    g.restore(); sparkle(t, 31.8, CX, 820, 300, 14);
+    stext('Akşam boynun', CX, 1110, 58, '#fff', { a: k * prog(t, 32, .4) });
+    stext('ağrıyınca aç.', CX, 1185, 58, '#fff', { a: k * prog(t, 32, .4) });
     headline(t, 31, 34.2, [['KAYDET', C.teal, 130]], 380);
   }
 
