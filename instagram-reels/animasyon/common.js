@@ -205,7 +205,7 @@ function drawHead(hx0, hy0, t, pain) {
 
 // Side-view seated person facing right. (x,y) = hip. Returns head centre in canvas coords.
 function fig(x, y, o = {}) {
-  const { fwd = 0, down = 0, pain = 0, t = 0, s = 1, furniture = true, glow = 1 } = o;
+  const { fwd = 0, down = 0, pain = 0, t = 0, s = 1, furniture = true, glow = 1, laptop = true, mug = true } = o;
   g.save(); g.translate(x, y); g.scale(s, s); g.lineCap = 'round'; g.lineJoin = 'round';
   // floor shadow
   g.fillStyle = 'rgba(20,10,60,.22)'; g.beginPath(); g.ellipse(170, 212, 330, 26, 0, 0, Math.PI * 2); g.fill();
@@ -215,12 +215,14 @@ function fig(x, y, o = {}) {
     segs([[-112, 30, 72, 30, 26, C.chair], [-112, 30, -130, -215, 26, C.chair]]);
     // desk
     segs([[445, -100, 445, 205, 20, C.wood], [150, -110, 475, -110, 24, C.wood]]);
+    if (mug) {
     // mug with steam
     blob(() => { rr(410, -190, 46, 60, 10); }, C.pink, 8);
     g.strokeStyle = C.navy; g.lineWidth = 8; g.beginPath(); g.arc(458, -160, 14, -Math.PI / 2, Math.PI / 2); g.stroke();
     g.strokeStyle = 'rgba(255,255,255,.8)'; g.lineWidth = 6;
     for (let k = 0; k < 2; k++) { g.beginPath(); for (let j = 0; j < 12; j++) { const yy = -200 - j * 6; g.lineTo(424 + k * 18 + Math.sin(t * 4 + j * .7 + k) * 6, yy); } g.stroke(); }
-    // laptop
+    }
+    if (laptop) {
     blob(() => rr(222, -134, 176, 20, 7), C.laptop, 8);
     g.save(); g.translate(392, -124); g.rotate(-1.33);
     blob(() => rr(0, -10, 205, 20, 8), C.laptop, 8); g.restore();
@@ -228,6 +230,7 @@ function fig(x, y, o = {}) {
       const gr = g.createRadialGradient(380, -230, 0, 380, -230, 170);
       gr.addColorStop(0, `rgba(150,230,255,${.45 * glow})`); gr.addColorStop(1, 'rgba(150,230,255,0)');
       g.fillStyle = gr; circ(380, -230, 170); g.fill();
+    }
     }
   }
   const sx = 10, sy = -262;

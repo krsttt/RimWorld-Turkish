@@ -3,7 +3,7 @@
 plan=$1; vid=$2; sfx=$3; out=$4
 read dur norm <<< "$(python3 -c "import json;p=json.load(open('$plan'));print(p['dur'],p['norm'])")"
 ins=""; fl=""; i=0
-while read k st; do ms=$(python3 -c "print(int($st*1000))"); ins="$ins -i $norm/$k.wav"; fl="$fl[$((i+2)):a]aresample=48000,adelay=${ms}|${ms}[a$i];"; i=$((i+1)); done < <(python3 -c "
+while read k st; do ms=$(python3 -c "print(int($st*1000))"); ins="$ins -i $norm/$k.wav"; fl="$fl[$((i+2)):a]aresample=48000,afade=t=in:d=0.008,areverse,afade=t=in:d=0.015,areverse,adelay=${ms}|${ms}[a$i];"; i=$((i+1)); done < <(python3 -c "
 import json;p=json.load(open('$plan'))
 for k,s in zip(p['keys'],p['starts']): print(k,s)")
 labels=$(for j in $(seq 0 $((i-1))); do printf "[a$j]"; done)

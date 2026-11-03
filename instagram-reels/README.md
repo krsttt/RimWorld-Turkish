@@ -51,3 +51,23 @@ klipler `ses/pocket_female_2/` içinde. Ses için atıf: "Ses: Pocket TTS Turkis
 - Reel 1'den "Ben fizyoterapistim. Bugün ilk günüm" sahnesi çıkarıldı (25 sn).
 - `animasyon/reel3.js`: diş hekimlerinde duruş bozukluğu videosu (39 sn). Kaynaklar: Lietz ve ark. 2018
   (PLoS ONE meta-analizi: boyun %58,5, bel %56,4, omuz %43,1), FDI ergonomi rehberi.
+
+
+## Güncelleme 5: üç yeni meslek videosu ve tam kalite kontrolü
+
+Paylaşılacak son sürümler `videolar/` içinde, kapaklar `kapaklar/` içinde:
+
+| # | Video | Süre | Kaynak (ekranda) |
+|---|---|---|---|
+| 1 | F1_masa_basi | 25 sn | - |
+| 2 | F2_boyun | 33 sn | - |
+| 3 | F3_dis_hekimi | 38 sn | Lietz ve ark., PLoS ONE 2018 |
+| 4 | F4_ogretmen | 39 sn | Tahernejad ve ark., Front. Public Health 2024 |
+| 5 | F5_kuafor | 38 sn | Kozak ve ark., J Occup Med Toxicol 2019 |
+| 6 | F6_sofor | 39 sn | Joseph ve ark., J Occup Health 2020 |
+
+- Tüm sesler tek referanstan (VoxCPM2 ultimate cloning) üretildi; `ses/klipler/`.
+- `ses/qa.py` kalite kontrolü (59 cümle): telaffuz hatası yok (Whisper, sona sessizlik eklenerek),
+  ses tutarlılığı ortalama 0.91, tüm videolar -14 LUFS, tepe en fazla -1.4 dBFS, cümle seviye farkı en fazla 2.5 dB,
+  her cümle kendi altyazı penceresi içinde.
+- Animasyon: `animasyon/prof.js` (ortak meslek parçaları), `reel_t.js`, `reel_k.js`, `reel_s.js`.

@@ -36,7 +36,7 @@ def to16(x, sr): return np.interp(np.arange(0, len(x), sr / 16000), np.arange(le
 def emb(x16):
     s = spk.create_stream(); s.accept_waveform(16000, x16); s.input_finished(); e = np.array(spk.compute(s)); return e / np.linalg.norm(e)
 r, rsr = sf.read(REF, dtype='float32'); REF_E = emb(to16(r if r.ndim == 1 else r.mean(1), rsr))
-NUM = {'3-4': 'üç dört', '30': 'otuz', '10': 'on', '8': 'sekiz', '5': 'beş', '3': 'üç'}
+NUM = {'3-4': 'üç dört', '30': 'otuz', '10': 'on', '8': 'sekiz', '5': 'beş', '3': 'üç', '2': 'iki', '1': 'bir'}
 def norm(s):
     s = s.replace('I', 'ı').replace('İ', 'i').lower()
     for k, w in NUM.items(): s = re.sub(rf'(?<!\d){re.escape(k)}(?!\d)', w, s)
@@ -62,13 +62,15 @@ def squeeze(x, max_gap=.35):
     keep.append(x[n*fr:]); return np.concatenate(keep)
 
 for k, text in jobs.items():
+    if os.path.exists(f'{OUT}/{k}.wav') and not os.environ.get('FORCE'):
+        print(f'{k} exists, skipped', flush=True); continue
     best = None
     for seed in range(NSEED):
         torch.manual_seed(seed); np.random.seed(seed); t1 = time.time()
         w = tts.generate(text=text, prompt_wav_path=REF, prompt_text=REF_TEXT, reference_wav_path=REF,
                          cfg_value=2.0, inference_timesteps=STEPS, normalize=False)
         x = squeeze(trim(np.asarray(w, dtype=np.float32).reshape(-1))); x16 = to16(x, SR)
-        s = asr.create_stream(); s.accept_waveform(16000, x16); asr.decode_stream(s); h = s.result.text.strip()
+        x16p = np.concatenate([np.zeros(4800, np.float32), x16, np.zeros(12800, np.float32)]); s = asr.create_stream(); s.accept_waveform(16000, x16p); asr.decode_stream(s); h = s.result.text.strip()
         c = cer(norm(text), norm(h)); sim = float(emb(x16) @ REF_E)
         print(f'  {k} seed{seed} {len(x)/SR:4.2f}s {time.time()-t1:4.0f}s CER {c:.2f} sim {sim:.3f} -> {h}', flush=True)
         key = (round(c, 2), -sim)

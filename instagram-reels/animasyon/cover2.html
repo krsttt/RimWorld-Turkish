@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}canvas{display:block}</style></head>
+<body><canvas id="c"></canvas><script src="common.js"></script><script src="prof.js"></script><script>
+const which = new URLSearchParams(location.search).get('k');
+function tag(text, x, y, size, rot) {
+  g.font = `900 ${size}px Inter`; const w = g.measureText(text).width + size * .8, h = size * 1.3;
+  g.save(); g.translate(x, y); g.rotate(rot); g.fillStyle = C.navy; rr(-w / 2 + 8, -h / 2 + 12, w, h, 30); g.fill();
+  g.fillStyle = C.coral; rr(-w / 2, -h / 2, w, h, 30); g.fill(); g.restore();
+  txt(text, x, y + 5, size, '#fff', { weight: 900, rot, maxW: 2000 });
+}
+function bottomPill(text) { pill(CX + 40, 1575, 600, 96, '#fff'); txt(text, CX + 40, 1578, 48, C.navy, { weight: 800 }); }
+function coverRender() {
+  SCENES.length = 0;
+  if (which === 't') {
+    SCENES.push([0, '#FF7A45', '#E8336D']); bg(5);
+    stext('ÖĞRETMEN', CX + 40, 430, 120, '#fff', { rot: -.03 }); tag('BEL AĞRISI', CX + 40, 580, 104, .02); stext('3 KÜÇÜK AYAR', CX + 40, 720, 84, C.sun, { rot: -.02 });
+    board(560, 820, 900, 1300, 5, 850, 1);
+    stand({ x: 330, fy: 1460, s: .72, lean: -.06, neck: -.38, shrug: .85, t: .5, top: TOP, bottom: BOT, painB: .85, armN: [620, 850], armF: [360, 1220], toolN: marker });
+  } else if (which === 'k') {
+    SCENES.push([0, '#FF4F8B', '#FF8A5B']); bg(5);
+    stext('KUAFÖR', CX + 40, 430, 130, '#fff', { rot: -.03 }); tag('BEL AĞRISI', CX + 40, 580, 104, .02); stext('3 KÜÇÜK AYAR', CX + 40, 720, 84, C.sun, { rot: -.02 });
+    g.save(); g.translate(0, 190); mirror(); salonChair(1210); const hc = client(1210, .5);
+    stand({ x: 300, fy: FY, s: .8, lean: .42, neck: .35, shrug: .85, t: .5, top: TOP, bottom: BOT, shoe: C.pink, painB: .85, armN: [hc.hx - 20, hc.hy - 70], armF: [hc.hx + 10, hc.hy - 30], prefN: 'up', toolN: scissors });
+    g.restore();
+  } else {
+    SCENES.push([0, '#3A7BFF', '#00C2FF']); bg(5);
+    stext('ŞOFÖR', CX + 40, 430, 130, '#fff', { rot: -.03 }); tag('BEL AĞRISI', CX + 40, 580, 104, .02); stext('3 KÜÇÜK AYAR', CX + 40, 720, 84, C.sun, { rot: -.02 });
+    g.save(); g.translate(OX, OY + 230); g.scale(K, K); car(.5, 0); seat(250, .5, 0); driver({ SX: 250, rec: .5, slump: 1, poke: 1, slide: 35, t: .5, painB: .9 }); g.restore();
+  }
+  bottomPill('Fizyoterapistten');
+}
+const s = document.createElement('script'); s.src = 'reel_' + which + '.js'; s.onload = () => { window.READY = 1; }; document.body.appendChild(s);
+</script></body></html>
