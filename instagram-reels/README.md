@@ -71,3 +71,12 @@ Paylaşılacak son sürümler `videolar/` içinde, kapaklar `kapaklar/` içinde:
   ses tutarlılığı ortalama 0.91, tüm videolar -14 LUFS, tepe en fazla -1.4 dBFS, cümle seviye farkı en fazla 2.5 dB,
   her cümle kendi altyazı penceresi içinde.
 - Animasyon: `animasyon/prof.js` (ortak meslek parçaları), `reel_t.js`, `reel_k.js`, `reel_s.js`.
+
+## Güncelleme 6: hemşire ve motokurye
+
+| # | Video | Süre | Kaynak (ekranda) |
+|---|---|---|---|
+| 7 | F7_hemsire | 39 sn | Hemşirelerde işe bağlı bel ağrısı meta-analizi (IJOSH) |
+| 8 | F8_motokurye | 39 sn | Malezya, 191 teslimat kuryesi (bazı çalışmalarda) |
+
+Kalite kontrolü (8 video, 79 cümle): sorun yok; ses tutarlılığı ortalama 0.91; tüm videolar -14 LUFS.

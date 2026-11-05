@@ -21,6 +21,16 @@ function coverRender() {
     g.save(); g.translate(0, 190); mirror(); salonChair(1210); const hc = client(1210, .5);
     stand({ x: 300, fy: FY, s: .8, lean: .42, neck: .35, shrug: .85, t: .5, top: TOP, bottom: BOT, shoe: C.pink, painB: .85, armN: [hc.hx - 20, hc.hy - 70], armF: [hc.hx + 10, hc.hy - 30], prefN: 'up', toolN: scissors });
     g.restore();
+  } else if (which === 'h') {
+    SCENES.push([0, '#14B8A6', '#2563FF']); bg(5);
+    stext('HEMŞİRE', CX + 40, 430, 130, '#fff', { rot: -.03 }); tag('BEL AĞRISI', CX + 40, 580, 104, .02); stext('3 KÜÇÜK AYAR', CX + 40, 720, 84, C.sun, { rot: -.02 });
+    g.save(); g.translate(0, 190); bed(1150, 0); const P = patient(1150, .5);
+    stand({ x: 300, fy: FY, s: .8, lean: .62, neck: .3, t: .5, top: TOP, bottom: BOT, shoe: '#fff', painB: .9, armN: [P[0] + 30, P[1]], armF: [P[0] + 60, P[1] - 10] });
+    g.restore();
+  } else if (which === 'm') {
+    SCENES.push([0, '#FF7A45', '#E8336D']); bg(5);
+    stext('MOTOKURYE', CX + 40, 430, 116, '#fff', { rot: -.03 }); tag('BEL AĞRISI', CX + 40, 580, 104, .02); stext('3 KÜÇÜK AYAR', CX + 40, 720, 84, C.sun, { rot: -.02 });
+    g.save(); g.translate(OX, OY + 200); g.scale(K, K); bike(.5, [700, 905]); rider({ lean: .62, slump: 1, poke: 1, bar: [700, 905], t: .5, bag: 1, bagTo: 0, painB: .9 }); g.restore();
   } else {
     SCENES.push([0, '#3A7BFF', '#00C2FF']); bg(5);
     stext('ŞOFÖR', CX + 40, 430, 130, '#fff', { rot: -.03 }); tag('BEL AĞRISI', CX + 40, 580, 104, .02); stext('3 KÜÇÜK AYAR', CX + 40, 720, 84, C.sun, { rot: -.02 });
