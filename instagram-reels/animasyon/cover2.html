@@ -21,6 +21,18 @@ function coverRender() {
     g.save(); g.translate(0, 190); mirror(); salonChair(1210); const hc = client(1210, .5);
     stand({ x: 300, fy: FY, s: .8, lean: .42, neck: .35, shrug: .85, t: .5, top: TOP, bottom: BOT, shoe: C.pink, painB: .85, armN: [hc.hx - 20, hc.hy - 70], armF: [hc.hx + 10, hc.hy - 30], prefN: 'up', toolN: scissors });
     g.restore();
+  } else if (which === 'a1') {
+    SCENES.push([0, '#F472B6', '#8B5CF6']); bg(5);
+    stext('EMZİRİRKEN', CX + 40, 430, 112, '#fff', { rot: -.03 }); tag('BOYUN AĞRISI', CX + 40, 580, 100, .02); stext('3 KÜÇÜK AYAR', CX + 40, 720, 84, C.sun, { rot: -.02 });
+    seatedMom({ x: 330, y: 1250, s: .85, lean: .38, neck: .8, t: .5, bp: [500, 1220], bRot: .15, pain: .9 });
+  } else if (which === 'a2') {
+    SCENES.push([0, '#FF7A45', '#E8336D']); bg(5);
+    stext('ANNELER', CX + 40, 430, 120, '#fff', { rot: -.03 }); tag('BEL AĞRISI', CX + 40, 580, 104, .02); stext('BEBEĞİ DOĞRU TAŞI', CX + 40, 720, 74, C.sun, { rot: -.02 });
+    frontMom(CX + 40, 1470, { s: .8, hip: 1, side: 1, t: .5, painB: .9 });
+  } else if (which === 'a3') {
+    SCENES.push([0, '#8B5CF6', '#E056FD']); bg(5);
+    stext('ANNE', CX + 40, 430, 130, '#fff', { rot: -.03 }); tag('BİLEĞİ', CX + 40, 590, 120, .02); stext('BİLEĞİN AĞRIYOR MU?', CX + 40, 740, 70, C.sun, { rot: -.02 });
+    handZoom(CX + 40, 1080, { thumb: 1, dev: .45, pain: .9, t: .5, r: 260 });
   } else if (which === 'h') {
     SCENES.push([0, '#14B8A6', '#2563FF']); bg(5);
     stext('HEMŞİRE', CX + 40, 430, 130, '#fff', { rot: -.03 }); tag('BEL AĞRISI', CX + 40, 580, 104, .02); stext('3 KÜÇÜK AYAR', CX + 40, 720, 84, C.sun, { rot: -.02 });
@@ -38,5 +50,7 @@ function coverRender() {
   }
   bottomPill('Fizyoterapistten');
 }
-const s = document.createElement('script'); s.src = 'reel_' + which + '.js'; s.onload = () => { window.READY = 1; }; document.body.appendChild(s);
+function loadJS(src, cb) { const s = document.createElement('script'); s.src = src; s.onload = cb; document.body.appendChild(s); }
+if (which[0] === 'a') loadJS('mom.js', () => loadJS('reel_' + which + '.js', () => { window.READY = 1; }));
+else loadJS('reel_' + which + '.js', () => { window.READY = 1; });
 </script></body></html>

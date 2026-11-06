@@ -8,8 +8,9 @@ import numpy as np, soundfile as sf, sherpa_onnx
 S = '/tmp/claude-0/-home-user-RimWorld-Turkish/db99d8a9-580e-542a-b548-df16cc4ac28f/scratchpad'
 M = f'{S}/dl/sherpa-onnx-whisper-small'
 TEXT = json.load(open(f'{S}/clone/jobs_all.json', encoding='utf-8')) | json.load(open(f'{S}/clone/jobs_prof.json', encoding='utf-8'))
-for p in 'tkshm':
+for p in ['t', 'k', 's', 'h', 'm', 'a1', 'a2', 'a3']:
     TEXT[f'{p}_3'] = TEXT['d_3']; TEXT[f'{p}_8'] = TEXT['d_8']
+TEXT['a2_9'] = TEXT['a3_9'] = TEXT['a1_9']
 asr = sherpa_onnx.OfflineRecognizer.from_whisper(encoder=M+'/small-encoder.int8.onnx', decoder=M+'/small-decoder.int8.onnx',
                                                  tokens=M+'/small-tokens.txt', language='tr', task='transcribe', num_threads=4)
 spk = sherpa_onnx.SpeakerEmbeddingExtractor(sherpa_onnx.SpeakerEmbeddingExtractorConfig(model=f'{S}/clone/spk.onnx', num_threads=2))

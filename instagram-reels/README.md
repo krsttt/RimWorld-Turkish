@@ -80,3 +80,11 @@ Paylaşılacak son sürümler `videolar/` içinde, kapaklar `kapaklar/` içinde:
 | 8 | F8_motokurye | 39 sn | Malezya, 191 teslimat kuryesi (bazı çalışmalarda) |
 
 Kalite kontrolü (8 video, 79 cümle): sorun yok; ses tutarlılığı ortalama 0.91; tüm videolar -14 LUFS.
+
+## Güncelleme 7: annelik serisi (3 video)
+
+| # | Video | Süre | Konu / kaynak |
+|---|---|---|---|
+| 9 | F9_anne_emzirme | 40 sn | Emzirme duruşu ve boyun ağrısı (BMC Musculoskelet Disord 2024 anketi: %48 haftalık boyun ağrısı) |
+| 10 | F10_anne_tasima | 41 sn | Bebeği kaldırma/taşıma ve bel ağrısı (doğum sonrası bel ağrısı sistematik derlemesi) |
+| 11 | F11_anne_bilegi | 39 sn | Anne bileği (De Quervain); istatistik yerine soruyla açılış |
